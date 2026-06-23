@@ -1,0 +1,21 @@
+name: deploy
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+   
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: docker build . -t naga1332/next.js
+      - run: echo "${{secrets.DOCKERHUB_PASSWORD}}"|docker login -u "${{secrets.DOCKERHUB_USERNAME}}" -password-stidn
+      - run: docker push naga1332/nextjs:latest
+
+ 
